@@ -12,10 +12,6 @@ exports.levelSequences = {
     require('./rampup/relativeRefs2').level,
     require('./rampup/reversingChanges').level
   ],
-  merge: [
-    require('./merge/fast-forward').level,
-    require('./merge/realMerge').level
-  ],
   remote: [
     require('./remote/clone').level,
     require('./remote/remoteBranches').level,
