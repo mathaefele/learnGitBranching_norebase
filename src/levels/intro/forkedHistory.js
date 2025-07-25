@@ -16,15 +16,11 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "## Real merge",
+              "## Forked history",
               "",
-              "You want to add a new feature to your software, but a bug fix has been merged in between.",
-              "* Create a contribution on a branch `feature` with two commits",
-              "* Go back on the `main branch`",
-              "* Create a contribution on a branch `bugFix` from here with one commit",
-              "* Go back on the `main branch`",
-              "* Merge the branch `bugFix` (fast Forward)",
-              "* Merge branch `feature` (real merge)",
+              "You want to add a new feature to your software, but a bug fix has appeared in between.",
+              "From a git perspective, main points at the latest version of your software and there are two branches that start from this revision and implement the new feature and the bug fix.",
+              "Let su build this together !",
               "",
               "",
               ""
@@ -80,6 +76,7 @@ exports.level = {
             ],
             "afterMarkdowns": [
               "## Bug fix implemented !",
+              " As a result, the history of the project has forked. We will see later how git will help us to merge all these revisions into the main branch of the software",
               "",
               "",
               ""
@@ -88,63 +85,6 @@ exports.level = {
             "beforeCommand": "git branch feature; git checkout feature; git commit; git commit; git checkout main;"
           }
         },
-        {
-          "type": "GitDemonstrationView",
-          "options": {
-            "beforeMarkdowns": [
-              "Go back on the `main` branch, so back on revision c1 again",
-              "",
-              "",
-              ""
-            ],
-            "afterMarkdowns": [
-              "## Back on the main branch",
-              "",
-              "",
-              ""
-            ],
-            "command": "git checkout main;",
-            "beforeCommand": "git branch feature; git checkout feature; git commit; git commit; git checkout main; git branch bugFix; git checkout bugFix; git commit; "
-          }
-        },
-        {
-          "type": "GitDemonstrationView",
-          "options": {
-            "beforeMarkdowns": [
-              "Merge the branch `bugFix`. This merge is a fast-forward as the history path of commits has not diverged between `main` and `bugFix`.",
-              "",
-              "",
-              ""
-            ],
-            "afterMarkdowns": [
-              "## Bug fix integrated in the main branch of the software !",
-              "",
-              "",
-              ""
-            ],
-            "command": "git merge bugFix",
-            "beforeCommand": "git branch feature; git checkout feature; git commit; git commit; git checkout main; git branch bugFix; git checkout bugFix; git commit; git checkout main;"
-          }
-        },
-        {
-          "type": "GitDemonstrationView",
-          "options": {
-            "beforeMarkdowns": [
-              "Merge branch `feature`. As we are already on branch `main`, we can directly merge `feature`.",
-              "",
-              "",
-              ""
-            ],
-            "afterMarkdowns": [
-              "## New feature integrated in the software !",
-              "",
-              "This one is a real merge because the history path of commits has diverged between `main` and `feature`. Git creates a new revision that gathers modifications coming from  all commits until the common ancestor (revision c1).",
-              ""
-            ],
-            "command": "git merge feature",
-            "beforeCommand": "git branch feature; git checkout feature; git commit; git commit; git checkout main; git branch bugFix; git checkout bugFix; git commit; git checkout main; git merge bugFix;"
-          }
-        }
       ]
     }
   }

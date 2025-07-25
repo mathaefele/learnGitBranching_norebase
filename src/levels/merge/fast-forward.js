@@ -21,7 +21,7 @@ exports.level = {
             "markdowns": [
               "## Fast-forward merge",
               "",
-              "You want to add a new feature to your software.",
+              "A new feature has been added in your software on a branch.",
               "* Create and switch to a branch `feature` to build this contribution",
               "* Create two commits on this branch",
               "* Switch back to the `main` branch",
