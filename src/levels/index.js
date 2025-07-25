@@ -4,13 +4,17 @@ exports.levelSequences = {
   intro: [
     require('./intro/commits').level,
     require('./intro/branching').level,
-    require('./intro/forkedHistory').level
+    require('./intro/forkedHistory').level,
   ],
   rampup: [
     require('./rampup/detachedHead').level,
     require('./rampup/relativeRefs').level,
     require('./rampup/relativeRefs2').level,
     require('./rampup/reversingChanges').level
+  ],
+  merge: [
+    require('./merge/fast-forward.js').level,
+    require('./merge/realMerge.js').level
   ],
   remote: [
     require('./remote/clone').level,
@@ -122,6 +126,16 @@ var sequenceInfo = exports.sequenceInfo = {
       'tr_TR': 'Git\'in muhteşemliklerinden bir porsiyon daha. Umarım açsındır'
     }
   },
+  merge: {
+    displayName: {
+      'en_US': 'Merging contributions',
+      'fr_FR': 'Fusionner des contributions',
+    },
+    about: {
+      'en_US': 'New features and bug fixes in different branches, let us merge them !',
+      'fr_FR': 'Nouvelles fonctionnalités et corrections de bugs, fusionnons tout ça !',
+    }
+  },
   remote: {
     tab: 'remote',
     displayName: {
@@ -215,144 +229,6 @@ var sequenceInfo = exports.sequenceInfo = {
       'it_IT': "E tu credevi che essere un dittatore benevolo fosse divertente...",
       'ta_IN': 'நீங்கள் ஒரு அக்கரை உள்ள சர்வாதிகாரியாக இருப்பது வேடிக்கையாக இருக்கும் என்று நினைத்தீர்களா...',
       'tr_TR': 'Ve hayırsever bir diktatör olmanın eğlenceli olacağını düşündün...'
-    }
-  },
-  move: {
-    displayName: {
-      'en_US': 'Moving Work Around',
-      'de_DE': 'Code umherschieben',
-      'fr_FR': 'Déplacer le travail',
-      'es_AR': 'Moviendo el trabajo por ahí',
-      'es_MX': 'Moviendo el trabajo por ahí',
-      'es_ES': 'Moviendo el trabajo por ahí',
-      'pt_BR': 'Movendo trabalho por aí',
-      'gl'   : 'Movendo o traballo por ahí',
-      'ja'   : 'コードの移動',
-      'ko'   : '코드 이리저리 옮기기',
-      'zh_CN': '移动提交记录',
-      'zh_TW': '調整提交順序',
-      'ru_RU': 'Перемещаем труды туда-сюда',
-      'uk'   : 'Переміщуємо роботу туди-сюди',
-      'vi'   : 'Di Chuyển Commit',
-      'sl_SI': 'Premikanje Dela Naokrog',
-      'pl'   : 'Przenoszenie pracy',
-      'it_IT': "Spostare il lavoro in giro",
-      'ta_IN': 'வேலைகளை பகிர்ந்து கொள்வது',
-      'tr_TR': 'İşi yürüt'
-    },
-    about: {
-      'en_US': '"Git" comfortable with modifying the source tree :P',
-      'de_DE': 'Gewöhn dich daran, den Git-Baum zu verändern',
-      'fr_FR': 'Soyez à l\'aise pour modifier l\'arbre Git',
-      'es_AR': 'Preparate para modificar el directorio fuente :P',
-      'es_MX': 'Ponte cómodo al modificar el directorio fuente :P',
-      'es_ES': 'Ponte cómodo cuando modifiques el directorio fuente',
-      'pt_BR': 'Fique confortável em modificar a árvore de códigos',
-      'gl'   : 'Ponte cómodo modificando a árbore de git',
-      'ko'   : '작업 트리를 수정하는건 식은죽 먹기지요 이제',
-      'ja'   : '話題のrebaseってどんなものだろう？って人にオススメ',
-      'zh_CN': '自由修改提交树',
-      'zh_TW': '自由修改提交樹',
-      'ru_RU': 'Не стесняйтесь менять историю',
-      'uk'   : 'Не соромимось змінювати історію',
-      'vi'   : 'Dễ dàng chỉnh sửa cây lịch sử với "Git" :P',
-      'sl_SI': 'Spretno "Git" premikanje po drevesu :P',
-      'pl'   : 'Git dobrze radzi sobie z modyfikacją drzewa źródłowego :P',
-      'it_IT': 'Modificare l\'albero con facilità. "GIT" ready :P',
-      'ta_IN': '"கிட்" மூல மரத்தை மாற்றுவதில் சிரந்தது :P',
-      'tr_TR': '"Git" kaynak ağacını (source tree) değiştirirken rahat olun :P '
-    }
-  },
-  mixed: {
-    displayName: {
-      'en_US': 'A Mixed Bag',
-      'de_DE': 'Eine bunte Mischung',
-      'ja'   : '様々なtips',
-      'fr_FR': 'Un assortiment',
-      'es_AR': 'Bolsa de gatos',
-      'es_MX': 'De todo un poco',
-      'es_ES': 'Un poco de todo',
-      'pt_BR': 'Sortidos',
-      'gl'   : 'Todo mesturado',
-      'ko'   : '종합선물세트',
-      'zh_CN': '杂项',
-      'zh_TW': '活用 git 的指令',
-      'ru_RU': 'Сборная солянка',
-      'uk'   : 'Всяке',
-      'vi'   : 'Vài Mẹo Linh Tinh',
-      'sl_SI': 'Mešana Vreča',
-      'pl'   : 'Po trochu wszystkiego',
-      'it_IT': "Un po' di tutto",
-      'ta_IN': 'ஒரு கலப்பு பை',
-      'tr_TR': 'Ortaya Karışık'
-    },
-    about: {
-      'en_US': 'A mixed bag of Git techniques, tricks, and tips',
-      'de_DE': 'Eine bunte Mischung an Techniken, Tipps und Tricks',
-      'ja'   : 'gitを使う上での様々なtipsやテクニックなど',
-      'fr_FR': 'Un assortiment de techniques et astuces pour utiliser Git',
-      'es_AR': 'Un rejunte de técnicas, trucos y tips sobre Git',
-      'es_MX': 'Un recopilatorio de técnicas, trucos y tips sobre Git',
-      'es_ES': 'Un batiburrillo de técnicas, trucos y sugerencias sobre Git',
-      'pt_BR': 'Técnicas, truques e dicas sortidas sobre Git',
-      'gl'   : 'Mestura de técnicas, trucos e consellos',
-      'ko'   : 'Git을 다루는 다양한 팁과 테크닉을 다양하게 알아봅니다',
-      'zh_CN': 'Git 技术、技巧与贴士大集合',
-      'zh_TW': 'git 的技術，招數與技巧',
-      'ru_RU': 'Ассорти из приёмов работы с Git, хитростей и советов',
-      'uk'   : 'Різні прийоми роботи з Git, хитрощі та поради',
-      'vi'   : 'Các kỹ thuật, bí quyết, và mẹo vặt hữu ích',
-      'sl_SI': 'Mešana vreča Git tehnik, trikov in nasvetov',
-      'pl'   : 'Po trochu wszystkiego. Wskazówki i triki',
-      'it_IT': "Comandi Git assortiti, trucchi e consigli",
-      'ta_IN': 'கிட் நுட்பங்கள், தந்திரங்கள் மற்றும் உதவிக்குறிப்புகளின் கலவையான பை',
-      'tr_TR': 'Git teknikleri, taktikleri ve püf noktalarından oluşan karma bir bölüm'
-    }
-  },
-  advanced: {
-    displayName: {
-      'en_US': 'Advanced Topics',
-      'de_DE': 'Themen für Fortgeschrittene',
-      'ja'   : '上級トピック',
-      'fr_FR': 'Sujets avancés',
-      'es_AR': 'Temas avanzados',
-      'es_MX': 'Temas avanzados',
-      'es_ES': 'Temas avanzados',
-      'pt_BR': 'Temas avançados',
-      'gl'   : 'Temas avanzados',
-      'zh_CN': '高级话题',
-      'zh_TW': '進階主題',
-      'ru_RU': 'Продвинутый уровень',
-      'uk'   : 'Досвідчений рівень',
-      'ko'   : '고급 문제',
-      'vi'   : 'Các Chủ Đề Nâng Cao',
-      'sl_SI': 'Napredne Teme',
-      'pl'   : 'Tematy zaawansowane',
-      'it_IT': "Argomenti avanzati",
-      'ta_IN': 'மேம்பட்ட தலைப்புகள்',
-      'tr_TR': 'İleri Seviye Konular'
-    },
-    about: {
-      'en_US': 'For the truly brave!',
-      'de_DE': 'Nur für die Tapferen',
-      'ja'   : '勇気ある人のみ！',
-      'fr_FR': 'Pour les plus courageux !',
-      'es_AR': '¡Para personas realmente valientes!',
-      'es_MX': '¡Para los verdaderos valientes!',
-      'es_ES': '¡Para los verdaderos valientes!',
-      'pt_BR': 'Para os verdadeiros valentes!',
-      'gl'   : '¡Para os verdadeiros valerosos!',
-      'zh_CN': '只为真正的勇士！',
-      'zh_TW': '來成為真正的強者吧！',
-      'ru_RU': 'Если ты смелый, ловкий, умелый – потренируйся тут',
-      'uk'   : 'Для хоробрих',
-      'ko'   : '용기있는 도전자를 위해 준비한 문제입니다',
-      'vi'   : 'Mạnh mẽ lên!',
-      'sl_SI': 'Za resnično pogumne!',
-      'pl'   : 'Dla naprawdę odważnych!',
-      'it_IT': "Per i più temerari!",
-      'ta_IN': 'உண்மையிலேயே தைரியமானவர்களுக்கு!',
-      'tr_TR': 'Gerçekten cesur olanlara!'
     }
   }
 };
