@@ -4,14 +4,17 @@ exports.levelSequences = {
   intro: [
     require('./intro/commits').level,
     require('./intro/branching').level,
-    require('./intro/fast-forward').level,
-    require('./intro/merge').level
+    require('./intro/forkedHistory').level
   ],
   rampup: [
     require('./rampup/detachedHead').level,
     require('./rampup/relativeRefs').level,
     require('./rampup/relativeRefs2').level,
     require('./rampup/reversingChanges').level
+  ],
+  merge: [
+    require('./merge/fast-forward').level,
+    require('./merge/realMerge').level
   ],
   remote: [
     require('./remote/clone').level,
